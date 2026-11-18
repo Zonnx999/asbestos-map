@@ -1,0 +1,172 @@
+:root{
+  --bg:#f5f4f1; --panel:#ffffff; --ink:#1f1e1c; --muted:#6b6862; --line:#e4e1da;
+  --c2:#d32f2f; --c1:#f9a825; --c1-ring:#8a5d00; --c0:#9e9e9e;
+  --c2-soft:#fbe3e1; --c1-soft:#fdf1d3; --c0-soft:#eeeeec;
+  --accent:#1f1e1c; --panel-w:360px; --peek:150px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:14px}
+button{font:inherit;color:inherit}
+#app{display:flex;height:100%;height:100dvh;position:relative;overflow:hidden}
+#mapwrap{flex:1;position:relative;min-width:0;z-index:0} /* own stacking context: Leaflet controls (z 1000) stay under the panel */
+#map{position:absolute;inset:0;background:#e9eef0}
+
+/* progress bar */
+#progress{position:absolute;top:0;left:0;right:0;height:3px;z-index:1200;overflow:hidden;background:transparent}
+#progress div{height:100%;width:30%;background:var(--c2);animation:prog 1.1s ease-in-out infinite}
+@keyframes prog{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
+
+/* panel */
+#panel{width:var(--panel-w);flex:none;background:var(--panel);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;z-index:1000;min-height:0}
+#app.collapsed #panel{display:none}
+#handle{display:none}
+#head{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+.title-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+h1{font-size:17px;margin:0;letter-spacing:-.01em}
+.icon-btn{border:1px solid var(--line);background:#fff;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:18px;line-height:1}
+.icon-btn:hover{border-color:#bbb}
+.icon-btn.floating{position:absolute;top:10px;left:10px;z-index:1000;box-shadow:0 1px 4px rgba(0,0,0,.2);width:40px;height:40px}
+.totals{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.stat{background:var(--bg);border-radius:8px;padding:6px 8px}
+.stat .n{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat .l{font-size:11.5px;color:var(--muted)}
+.stat.red .n{color:var(--c2)} .stat.amber .n{color:#a36b00} .stat.grey .n{color:#616161}
+.sub{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+.search-wrap{margin-top:10px}
+input[type=search]{width:100%;font:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff}
+input[type=search]:focus{outline:2px solid #1f1e1c22;border-color:#999}
+#scroll{overflow:auto;flex:1;padding:12px 16px 24px;-webkit-overflow-scrolling:touch;min-height:0}
+section{margin-bottom:18px}
+h2{font-size:12.5px;margin:0 0 8px;color:var(--muted);font-weight:600;letter-spacing:.02em;display:inline}
+section>h2{display:block}
+.note{font-size:12px;color:var(--muted);line-height:1.55;margin:8px 0 0}
+.btn{font-size:13px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+.btn:hover{border-color:#bbb}
+.link-btn{border:0;background:none;padding:0;color:#1a5fb4;cursor:pointer;font-size:12.5px;text-decoration:underline}
+
+/* segmented + chips */
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{flex:1;font-size:13px;border:0;background:#fff;padding:8px 4px;cursor:pointer;color:var(--muted)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer;font-size:12.5px;color:var(--muted)}
+.chip.on{border-color:#888;color:var(--ink);background:#faf9f6}
+.chip b{font-weight:600;font-variant-numeric:tabular-nums}
+.chip:not(.on) .dot{opacity:.35}
+
+/* dots */
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none;vertical-align:-1px;margin-right:4px;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.28)}
+.dot.c2{background:var(--c2)}
+.dot.c1{background:var(--c1);border:1.5px dashed var(--c1-ring);box-shadow:none}
+.dot.c0{background:var(--c0)}
+.legend-notes{list-style:none;padding:0;margin:10px 0 0;font-size:12px;color:var(--muted);line-height:1.5}
+.legend-notes li{margin-bottom:4px}
+.cl-sample{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--c2);color:#fff;font-size:10px;font-weight:700;flex:none;margin-right:4px}
+
+/* choropleth legend */
+.choro-legend{margin-top:8px;font-size:12px;color:var(--muted)}
+.choro-legend .bins{display:flex;gap:2px;margin:4px 0}
+.choro-legend .bin{flex:1;text-align:center}
+.choro-legend .sw{height:10px;border-radius:2px;border:1px solid rgba(0,0,0,.08)}
+.choro-legend .lab{font-size:10.5px;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* results / focus cards */
+.card{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff}
+.card h3{font-size:15px;margin:0 0 2px}
+.card .meta{font-size:12px;color:var(--muted)}
+.card .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}
+.mini div{background:var(--bg);border-radius:6px;padding:4px 6px;font-size:11px;color:var(--muted)}
+.mini b{display:block;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+.mini .r b{color:var(--c2)}
+.list{list-style:none;margin:8px 0 0;padding:0;border:1px solid var(--line);border-radius:8px;max-height:340px;overflow:auto}
+.list li{padding:7px 10px;border-bottom:1px solid var(--line);font-size:12.5px;cursor:pointer;display:flex;gap:6px;align-items:flex-start}
+.list li:last-child{border-bottom:0}
+.list li:hover{background:#faf9f6}
+.list li .dot{margin-top:3px}
+.list li .t{min-width:0;flex:1}
+.list li .nm{display:block;font-weight:500;overflow-wrap:anywhere}
+.list li small{color:var(--muted);overflow-wrap:anywhere}
+.list li .nopos{font-size:10.5px;color:#8a5d00;background:var(--c1-soft);border-radius:4px;padding:0 4px;margin-left:4px;white-space:nowrap}
+.list li.more{justify-content:center;color:#1a5fb4;cursor:pointer}
+.list li.region .nm::before{content:"지역 · ";color:var(--muted);font-weight:400}
+.empty-list{font-size:12.5px;color:var(--muted);padding:8px 0}
+
+/* detail (popup and mobile card) */
+.pop h3{font-size:14.5px;margin:0 0 4px;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:4px;margin-bottom:6px;font-weight:600}
+.tag.c2{background:var(--c2-soft);color:#a01e1e}
+.tag.c1{background:var(--c1-soft);color:#7a5200}
+.tag.c0{background:var(--c0-soft);color:#555}
+.pop table{border-collapse:collapse;font-size:12.5px}
+.pop td{padding:2px 8px 2px 0;vertical-align:top}
+.pop td:first-child{color:var(--muted);white-space:nowrap}
+.pop .na{color:#aaa}
+.pop .src{margin-top:6px;font-size:11.5px;color:var(--muted);line-height:1.5}
+.pop .src a{color:#1a5fb4}
+.pop .actions{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.leaflet-popup-content{margin:10px 12px;max-height:300px;overflow:auto;font-family:inherit}
+
+/* disclaimer, sources, footer */
+.disclaimer{padding-left:16px;margin:0;font-size:12px;color:var(--muted);line-height:1.6}
+.disclaimer li{margin-bottom:4px}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▸ ";color:var(--muted)}
+details[open] summary::before{content:"▾ "}
+.sources{list-style:none;padding:0;margin:8px 0 0;font-size:12px;line-height:1.5;max-height:320px;overflow:auto}
+.sources li{padding:5px 0;border-bottom:1px solid var(--line)}
+.sources a{color:#1a5fb4;text-decoration:none}
+.sources small{color:var(--muted)}
+.foot{font-size:11.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:10px}
+
+/* map overlays */
+#banner{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:1000;background:#fff;border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);padding:10px 12px;display:flex;gap:10px;align-items:center;max-width:min(560px,calc(100% - 32px));font-size:12.5px;line-height:1.5}
+#banner[hidden]{display:none}
+#banner p{margin:0;flex:1;min-width:0}
+#banner .btn{flex:none;white-space:nowrap}
+#map.muted .leaflet-tile-pane{filter:grayscale(1) brightness(1.06) contrast(.88)}
+#error{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:1000;background:#fff3f2;color:#8b1a1a;border:1px solid #f1c2bd;border-radius:10px;padding:8px 12px;font-size:13px;max-width:calc(100% - 32px)}
+.cl{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;font-size:12px;
+  border:2px solid rgba(255,255,255,.95);box-shadow:0 1px 4px rgba(0,0,0,.3);line-height:1.05;font-variant-numeric:tabular-nums}
+.cl small{font-size:9px;font-weight:600;opacity:.95}
+.cl.c2{background:var(--c2)} .cl.c1{background:#e0950b} .cl.c0{background:#8d8d8d}
+.region-label{background:none;border:0;box-shadow:none;font-size:11px;font-weight:600;color:#3d3a35;text-align:center;white-space:nowrap;
+  text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;pointer-events:none}
+.region-label span{display:block;font-weight:400;font-size:10px;color:#5d5a55}
+.leaflet-tooltip.rt{font-size:12px;line-height:1.5}
+.leaflet-container{font-family:inherit}
+
+/* mobile bottom sheet */
+@media (max-width:720px){
+  #app{display:block}
+  #mapwrap{position:absolute;inset:0}
+  #app.collapsed #panel{display:flex}
+  #collapse,#expand{display:none !important}
+  #panel{position:absolute;left:0;right:0;bottom:0;width:100%;height:92%;border-right:0;border-top:1px solid var(--line);
+    border-radius:14px 14px 0 0;box-shadow:0 -2px 14px rgba(0,0,0,.15);transition:transform .22s ease;will-change:transform}
+  #panel.peek{transform:translateY(calc(100% - var(--peek)))}
+  #panel.half{transform:translateY(45%)}
+  #panel.full{transform:translateY(0)}
+  #panel.dragging{transition:none}
+  #handle{display:flex;justify-content:center;align-items:center;height:22px;cursor:grab;touch-action:none;flex:none}
+  #handle span{width:40px;height:5px;border-radius:3px;background:#ccc}
+  #head{padding:0 14px 8px;touch-action:none}
+  h1{font-size:15px}
+  .totals{margin-top:6px}
+  .stat{padding:4px 6px}
+  .stat .n{font-size:15px}
+  .sub{display:none}
+  .chip{padding:9px 12px}
+  .seg button{padding:11px 4px}
+  .leaflet-control-zoom a{width:40px !important;height:40px !important;line-height:40px !important}
+  #banner{bottom:auto;top:12px}
+}
+@media (max-width:720px){
+  #mapwrap{bottom:calc(var(--peek) - 14px)}
+  #banner{top:10px;left:10px;right:60px;transform:none;max-width:none}
+}

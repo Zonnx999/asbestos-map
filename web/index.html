@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>전국 석면 건축물 지도</title>
+<meta name="description" content="공공데이터포털에 공개된 석면건축물·석면조사대상 건축물 목록을 시·도, 시·군·구, 건물 단위로 보여 주는 지도">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="progress" hidden><div></div></div>
+
+  <aside id="panel" class="half" aria-label="정보 패널">
+    <div id="handle" role="button" tabindex="0" aria-label="패널 크기 바꾸기"><span></span></div>
+    <header id="head">
+      <div class="title-row">
+        <h1>전국 석면 건축물 지도</h1>
+        <button id="collapse" class="icon-btn" title="패널 접기" aria-label="패널 접기">‹</button>
+      </div>
+      <div class="totals" id="totals">
+        <div class="stat red"><div class="n" id="t2">–</div><div class="l">석면건축물</div></div>
+        <div class="stat amber"><div class="n" id="t1">–</div><div class="l">여부 미표기</div></div>
+        <div class="stat grey"><div class="n" id="t0">–</div><div class="l">비해당</div></div>
+      </div>
+      <p class="sub" id="coordline"></p>
+      <div class="search-wrap">
+        <input type="search" id="q" placeholder="건물명·주소·지역 검색" autocomplete="off" aria-label="검색">
+      </div>
+    </header>
+
+    <div id="scroll">
+      <section id="results" hidden></section>
+      <section id="focus" hidden></section>
+
+      <section>
+        <h2>지역 색 기준</h2>
+        <div class="seg" id="metric">
+          <button data-v="c2" class="on">석면건축물</button>
+          <button data-v="all">조사대상 전체</button>
+        </div>
+        <div id="choroLegend" class="choro-legend"></div>
+      </section>
+
+      <section>
+        <h2>건물 점 보기</h2>
+        <div class="chips" id="classes">
+          <button class="chip on" data-c="2" aria-pressed="true"><span class="dot c2"></span>석면건축물 <b id="f2"></b></button>
+          <button class="chip on" data-c="1" aria-pressed="true"><span class="dot c1"></span>여부 미표기 <b id="f1"></b></button>
+          <button class="chip" data-c="0" aria-pressed="false"><span class="dot c0"></span>비해당 <b id="f0"></b></button>
+        </div>
+        <ul class="legend-notes">
+          <li><span class="dot c2"></span><b>석면건축물</b>: 자료에 석면건축물로 표기됨</li>
+          <li><span class="dot c1"></span><b>여부 미표기</b>: 조사대상 목록에 있으나 석면 여부 표기가 없음. 석면이 없다는 뜻이 아님</li>
+          <li><span class="dot c0"></span><b>비해당</b>: 자료에 석면건축물 아님으로 표기됨</li>
+          <li><span class="cl-sample">12</span>여러 건물 묶음. 안에 석면건축물이 있으면 빨강</li>
+        </ul>
+        <p class="note" id="loadnote"></p>
+      </section>
+
+      <section>
+        <h2>알아 둘 점</h2>
+        <ul class="disclaimer">
+          <li><b>조사대상 ≠ 석면 있음.</b> 석면조사대상 목록은 석면이 있는 건물 목록이 아닙니다. ‘여부 미표기’는 석면이 없다는 뜻도 아닙니다.</li>
+          <li><b>철거·제거 반영 지연.</b> 석면 해체·제거나 건물 철거가 자료에 늦게 반영될 수 있습니다.</li>
+          <li><b>위치 오차.</b> 좌표 상당수는 주소를 좌표로 바꾼(지오코딩) 결과라 실제 위치와 다를 수 있습니다. 좌표가 없는 건물은 지역 색으로만 셉니다.</li>
+          <li><b>참고용.</b> 법적 효력이 없습니다. 정확한 내용은 원 자료 제공기관(시·군·구)에 확인하세요.</li>
+          <li><b>출처.</b> 공공데이터포털(data.go.kr) 각 기관 공개 자료, 공공데이터 이용허락 범위 안에서 사용합니다.</li>
+        </ul>
+      </section>
+
+      <section>
+        <details id="sourcesBox">
+          <summary><h2>데이터 출처 <span id="srcN"></span></h2></summary>
+          <ul class="sources" id="sources"></ul>
+        </details>
+      </section>
+
+      <footer class="foot" id="foot"></footer>
+    </div>
+  </aside>
+
+  <main id="mapwrap">
+    <div id="map" aria-label="지도"></div>
+    <button id="expand" class="icon-btn floating" title="패널 펼치기" aria-label="패널 펼치기" hidden>›</button>
+    <div id="banner" hidden>
+      <p><b>참고용 지도입니다.</b> 석면조사대상 목록은 석면이 있는 건물 목록이 아니며, 철거·제거가 늦게 반영되고, 위치는 주소에서 추정해 틀릴 수 있습니다.</p>
+      <button id="bannerOk" class="btn">확인</button>
+    </div>
+    <div id="error" hidden></div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/supercluster@8.0.1/dist/supercluster.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

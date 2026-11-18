@@ -1,0 +1,728 @@
+{
+ "built_at": "2026-11-18T09:47:38+09:00",
+ "totals": {
+  "c2": 8984,
+  "c1": 2290,
+  "c0": 28393,
+  "points": 1675,
+  "nocoord": 37992
+ },
+ "sources": [
+  {
+   "id": "15053446",
+   "publisher": "강원특별자치도 영월군",
+   "title": "강원특별자치도 영월군_석면조사대상 건축물",
+   "updated": "2025-09-02",
+   "rows": 64,
+   "url": "https://www.data.go.kr/data/15053446/fileData.do",
+   "rows_final": 64
+  },
+  {
+   "id": "3046237",
+   "publisher": "강원특별자치도 원주시",
+   "title": "강원특별자치도 원주시_석면조사 대상 건축물 정보",
+   "updated": "2025-12-03",
+   "rows": 638,
+   "url": "https://www.data.go.kr/data/3046237/fileData.do",
+   "rows_final": 638
+  },
+  {
+   "id": "3046238",
+   "publisher": "강원특별자치도 춘천시",
+   "title": "강원특별자치도 춘천시_석면조사 대상 건축물 조회 리스트",
+   "updated": "2026-09-28",
+   "rows": 138,
+   "url": "https://www.data.go.kr/data/3046238/fileData.do",
+   "rows_final": 138
+  },
+  {
+   "id": "15012282",
+   "publisher": "경기도 고양시",
+   "title": "경기도 고양시_석면조사대상 건축물정보",
+   "updated": "2026-05-08",
+   "rows": 1266,
+   "url": "https://www.data.go.kr/data/15012282/fileData.do",
+   "rows_final": 1263
+  },
+  {
+   "id": "3073849",
+   "publisher": "경기도 군포시",
+   "title": "경기도 군포시_석면조사 대상건축물 현황",
+   "updated": "2026-09-30",
+   "rows": 389,
+   "url": "https://www.data.go.kr/data/3073849/fileData.do",
+   "rows_final": 347
+  },
+  {
+   "id": "15000828",
+   "publisher": "경기도 성남시",
+   "title": "경기도 성남시_석면조사대상건축물_현황",
+   "updated": "2026-11-04",
+   "rows": 148,
+   "url": "https://www.data.go.kr/data/15000828/fileData.do",
+   "rows_final": 148
+  },
+  {
+   "id": "3047316",
+   "publisher": "경기도 안산시",
+   "title": "경기도_안산시_석면조사대상시설 현황",
+   "updated": "2026-02-20",
+   "rows": 204,
+   "url": "https://www.data.go.kr/data/3047316/fileData.do",
+   "rows_final": 203
+  },
+  {
+   "id": "3047293",
+   "publisher": "경기도 하남시",
+   "title": "경기도 하남시_건축물 석면조사대상",
+   "updated": "2026-08-24",
+   "rows": 241,
+   "url": "https://www.data.go.kr/data/3047293/fileData.do",
+   "rows_final": 240
+  },
+  {
+   "id": "15093011",
+   "publisher": "경상남도 김해시",
+   "title": "경상남도 김해시_석면조사대상건축물 현황",
+   "updated": "2026-10-12",
+   "rows": 79,
+   "url": "https://www.data.go.kr/data/15093011/fileData.do",
+   "rows_final": 78
+  },
+  {
+   "id": "3068544",
+   "publisher": "경상남도 창원시",
+   "title": "경상남도 창원시_석면조사대상 건축물 현황",
+   "updated": "2026-05-28",
+   "rows": 332,
+   "url": "https://www.data.go.kr/data/3068544/fileData.do",
+   "rows_final": 332
+  },
+  {
+   "id": "3047216",
+   "publisher": "경상북도 김천시",
+   "title": "경상북도 김천시_석면조사대상건축물현황",
+   "updated": "2026-09-14",
+   "rows": 35,
+   "url": "https://www.data.go.kr/data/3047216/fileData.do",
+   "rows_final": 35
+  },
+  {
+   "id": "3047155",
+   "publisher": "경상북도 문경시",
+   "title": "경상북도 문경시_석면건축물현황",
+   "updated": "2023-06-23",
+   "rows": 49,
+   "url": "https://www.data.go.kr/data/3047155/fileData.do",
+   "rows_final": 49
+  },
+  {
+   "id": "3047099",
+   "publisher": "경상북도 안동시",
+   "title": "경상북도 안동시_석면조사 대상 건축물",
+   "updated": "2025-11-25",
+   "rows": 434,
+   "url": "https://www.data.go.kr/data/3047099/fileData.do",
+   "rows_final": 433
+  },
+  {
+   "id": "3068391",
+   "publisher": "경상북도 영양군",
+   "title": "경상북도 영양군_석면조사대상 건축물 현황",
+   "updated": "2026-11-17",
+   "rows": 12,
+   "url": "https://www.data.go.kr/data/3068391/fileData.do",
+   "rows_final": 11
+  },
+  {
+   "id": "3046945",
+   "publisher": "경상북도 영주시",
+   "title": "경상북도 영주시_석면조사대상 건축물 정보",
+   "updated": "2025-06-24",
+   "rows": 86,
+   "url": "https://www.data.go.kr/data/3046945/fileData.do",
+   "rows_final": 54
+  },
+  {
+   "id": "3047310",
+   "publisher": "경상북도 예천군",
+   "title": "경상북도 예천군_관내 석면조사대상 건축물",
+   "updated": "2026-08-12",
+   "rows": 30,
+   "url": "https://www.data.go.kr/data/3047310/fileData.do",
+   "rows_final": 26
+  },
+  {
+   "id": "3068114",
+   "publisher": "경상북도 청송군",
+   "title": "경상북도 청송군 석면조사 대상 건축물 현황",
+   "updated": "2024-06-27",
+   "rows": 50,
+   "url": "https://www.data.go.kr/data/3068114/fileData.do",
+   "rows_final": 50
+  },
+  {
+   "id": "3073551",
+   "publisher": "경상북도 칠곡군",
+   "title": "경상북도 칠곡군_석면조사대상 건축물 현황",
+   "updated": "2014-04-28",
+   "rows": 112,
+   "url": "https://www.data.go.kr/data/3073551/fileData.do",
+   "rows_final": 112
+  },
+  {
+   "id": "15113223",
+   "publisher": "경상북도 포항시",
+   "title": "경상북도 포항시_석면조사",
+   "updated": "2026-09-16",
+   "rows": 89,
+   "url": "https://www.data.go.kr/data/15113223/fileData.do",
+   "rows_final": 88
+  },
+  {
+   "id": "3046092",
+   "publisher": "대구광역시 남구",
+   "title": "대구광역시 남구_석면조사 대상 건축물 현황",
+   "updated": "2026-10-02",
+   "rows": 234,
+   "url": "https://www.data.go.kr/data/3046092/fileData.do",
+   "rows_final": 233
+  },
+  {
+   "id": "3047280",
+   "publisher": "대구광역시 달서구",
+   "title": "대구광역시 달서구_석면조사대상 건축물 현황",
+   "updated": "2026-05-12",
+   "rows": 87,
+   "url": "https://www.data.go.kr/data/3047280/fileData.do",
+   "rows_final": 87
+  },
+  {
+   "id": "3046188",
+   "publisher": "대구광역시 동구",
+   "title": "대구광역시_동구_석면조사건축물",
+   "updated": "2026-05-06",
+   "rows": 360,
+   "url": "https://www.data.go.kr/data/3046188/fileData.do",
+   "rows_final": 320
+  },
+  {
+   "id": "3068216",
+   "publisher": "대구광역시 북구",
+   "title": "대구광역시 북구_석면조사대상건축물",
+   "updated": "2026-08-25",
+   "rows": 173,
+   "url": "https://www.data.go.kr/data/3068216/fileData.do",
+   "rows_final": 173
+  },
+  {
+   "id": "3068390",
+   "publisher": "대구광역시 서구",
+   "title": "대구광역시 서구_석면조사",
+   "updated": "2026-07-14",
+   "rows": 39,
+   "url": "https://www.data.go.kr/data/3068390/fileData.do",
+   "rows_final": 39
+  },
+  {
+   "id": "15052017",
+   "publisher": "대구광역시 수성구",
+   "title": "대구광역시_수성구_석면조사 대상 건축물 현황",
+   "updated": "2026-09-18",
+   "rows": 71,
+   "url": "https://www.data.go.kr/data/15052017/fileData.do",
+   "rows_final": 52
+  },
+  {
+   "id": "3077221",
+   "publisher": "대구광역시 수성구",
+   "title": "대구광역시 수성구_석면조사 미실시현황",
+   "updated": "2025-07-25",
+   "rows": 10,
+   "url": "https://www.data.go.kr/data/3077221/fileData.do",
+   "rows_final": 10
+  },
+  {
+   "id": "3057407",
+   "publisher": "대구광역시 중구",
+   "title": "대구광역시 중구 석면조사대상 건축물",
+   "updated": "2025-07-14",
+   "rows": 234,
+   "url": "https://www.data.go.kr/data/3057407/fileData.do",
+   "rows_final": 181
+  },
+  {
+   "id": "15103460",
+   "publisher": "부산광역시",
+   "title": "부산광역시_공공건축물 석면 현황",
+   "updated": "2026-09-20",
+   "rows": 78,
+   "url": "https://www.data.go.kr/data/15103460/fileData.do",
+   "rows_final": 78
+  },
+  {
+   "id": "3038626",
+   "publisher": "부산광역시 영도구",
+   "title": "부산광역시 영도구_공공건축물 석면조사결과",
+   "updated": "2026-09-04",
+   "rows": 11,
+   "url": "https://www.data.go.kr/data/3038626/fileData.do",
+   "rows_final": 11
+  },
+  {
+   "id": "3069195",
+   "publisher": "부산광역시 영도구",
+   "title": "부산광역시 영도구_석면조사 대상 건축물 현황",
+   "updated": "2026-09-10",
+   "rows": 33,
+   "url": "https://www.data.go.kr/data/3069195/fileData.do",
+   "rows_final": 33
+  },
+  {
+   "id": "15026377",
+   "publisher": "부산광역시 중구",
+   "title": "부산광역시_중구_석면조사 대상 건축물 현황",
+   "updated": "2026-07-09",
+   "rows": 99,
+   "url": "https://www.data.go.kr/data/15026377/fileData.do",
+   "rows_final": 94
+  },
+  {
+   "id": "15166534",
+   "publisher": "서울특별시 강서구",
+   "title": "서울특별시 강서구_공공건축물 석면관리정보",
+   "updated": "2026-09-19",
+   "rows": 81,
+   "url": "https://www.data.go.kr/data/15166534/fileData.do",
+   "rows_final": 81
+  },
+  {
+   "id": "15052329",
+   "publisher": "서울특별시 서초구",
+   "title": "서울특별시 서초구_공공건축물 석면건축물 여부",
+   "updated": "2026-02-02",
+   "rows": 203,
+   "url": "https://www.data.go.kr/data/15052329/fileData.do",
+   "rows_final": 195
+  },
+  {
+   "id": "3077850",
+   "publisher": "서울특별시 용산구",
+   "title": "서울특별시 용산구_공공건물석면정보현황",
+   "updated": "2026-07-01",
+   "rows": 65,
+   "url": "https://www.data.go.kr/data/3077850/fileData.do",
+   "rows_final": 51
+  },
+  {
+   "id": "3076234",
+   "publisher": "울산광역시 남구",
+   "title": "울산광역시 남구_석면건축물 정보",
+   "updated": "2026-09-21",
+   "rows": 111,
+   "url": "https://www.data.go.kr/data/3076234/fileData.do",
+   "rows_final": 110
+  },
+  {
+   "id": "3073073",
+   "publisher": "인천광역시 계양구",
+   "title": "인천광역시_계양구_석면조사대상 건축물",
+   "updated": "2026-04-20",
+   "rows": 361,
+   "url": "https://www.data.go.kr/data/3073073/fileData.do",
+   "rows_final": 344
+  },
+  {
+   "id": "3073220",
+   "publisher": "인천광역시 연수구",
+   "title": "인천광역시 연수구_석면조사대상 건축물 현황",
+   "updated": "2026-03-17",
+   "rows": 36,
+   "url": "https://www.data.go.kr/data/3073220/fileData.do",
+   "rows_final": 36
+  },
+  {
+   "id": "15038683",
+   "publisher": "인천광역시 영종구",
+   "title": "인천광역시_중구_석면조사대상건축물 현황",
+   "updated": "2025-07-24",
+   "rows": 375,
+   "url": "https://www.data.go.kr/data/15038683/fileData.do",
+   "rows_final": 374
+  },
+  {
+   "id": "3072921",
+   "publisher": "인천광역시 제물포구",
+   "title": "인천광역시 제물포구_석면조사대상건축물",
+   "updated": "2026-08-20",
+   "rows": 359,
+   "url": "https://www.data.go.kr/data/3072921/fileData.do",
+   "rows_final": 353
+  },
+  {
+   "id": "15086967",
+   "publisher": "전남광주통합특별시 광산구",
+   "title": "전남광주통합특별시 광산구_석면건축물현황",
+   "updated": "2026-06-23",
+   "rows": 47,
+   "url": "https://www.data.go.kr/data/15086967/fileData.do",
+   "rows_final": 46
+  },
+  {
+   "id": "3074513",
+   "publisher": "전북특별자치도 고창군",
+   "title": "전북특별자치도 고창군_석면조사건축물현황",
+   "updated": "2026-06-02",
+   "rows": 27,
+   "url": "https://www.data.go.kr/data/3074513/fileData.do",
+   "rows_final": 27
+  },
+  {
+   "id": "3068148",
+   "publisher": "전북특별자치도 군산시",
+   "title": "전북특별자치도 군산시_석면조사대상 건축물현황",
+   "updated": "2026-04-28",
+   "rows": 109,
+   "url": "https://www.data.go.kr/data/3068148/fileData.do",
+   "rows_final": 109
+  },
+  {
+   "id": "3077425",
+   "publisher": "전북특별자치도 장수군",
+   "title": "전북특별자치도 장수군_석면조사대상 건축물 현황",
+   "updated": "2026-05-29",
+   "rows": 119,
+   "url": "https://www.data.go.kr/data/3077425/fileData.do",
+   "rows_final": 119
+  },
+  {
+   "id": "15054349",
+   "publisher": "전북특별자치도 정읍시",
+   "title": "전북특별자치도 정읍시_다중이용시설 석면조사 건축물 현황",
+   "updated": "2025-12-09",
+   "rows": 96,
+   "url": "https://www.data.go.kr/data/15054349/fileData.do",
+   "rows_final": 95
+  },
+  {
+   "id": "15054350",
+   "publisher": "전북특별자치도 정읍시",
+   "title": "전북특별자치도 정읍시_석면조사 대상 건축물 현황",
+   "updated": "2025-12-09",
+   "rows": 205,
+   "url": "https://www.data.go.kr/data/15054350/fileData.do",
+   "rows_final": 204
+  },
+  {
+   "id": "3075177",
+   "publisher": "충청남도 계룡시",
+   "title": "충청남도_계룡시_석면조사 대상 건축물 현황",
+   "updated": "2026-10-08",
+   "rows": 9,
+   "url": "https://www.data.go.kr/data/3075177/fileData.do",
+   "rows_final": 9
+  },
+  {
+   "id": "3073034",
+   "publisher": "충청남도 아산시",
+   "title": "충청남도 아산시 석면조사 대상건축물현황",
+   "updated": "2025-11-27",
+   "rows": 486,
+   "url": "https://www.data.go.kr/data/3073034/fileData.do",
+   "rows_final": 482
+  },
+  {
+   "id": "3071052",
+   "publisher": "충청남도 천안시",
+   "title": "충청남도 천안시_석면조사 건축물 현황",
+   "updated": "2026-03-11",
+   "rows": 243,
+   "url": "https://www.data.go.kr/data/3071052/fileData.do",
+   "rows_final": 219
+  },
+  {
+   "id": "3046085",
+   "publisher": "충청북도 괴산군",
+   "title": "충청북도 괴산군_석면조사대상건축물현황",
+   "updated": "2022-09-28",
+   "rows": 53,
+   "url": "https://www.data.go.kr/data/3046085/fileData.do",
+   "rows_final": 53
+  },
+  {
+   "id": "15092323",
+   "publisher": "한국환경공단",
+   "title": "한국환경공단_석면조사대상건축물현황(공공건축물)",
+   "updated": "2026-11-03",
+   "rows": 33482,
+   "url": "https://www.data.go.kr/data/15092323/fileData.do",
+   "rows_final": 33445
+  },
+  {
+   "id": "15155665",
+   "publisher": "전국석면조사건축물표준데이터 (19 지자체)",
+   "title": "전국석면조사건축물표준데이터",
+   "updated": "2026-11-02",
+   "rows": 1525,
+   "url": "https://www.data.go.kr/data/15155665/standard.do",
+   "rows_final": 1516
+  }
+ ],
+ "sido": [
+  {
+   "code": "11",
+   "name": "서울특별시",
+   "bbox": [
+    126.7646,
+    37.4288,
+    127.1829,
+    37.7015
+   ],
+   "c2": 686,
+   "c1": 37,
+   "c0": 3426,
+   "points": 0,
+   "nocoord": 4149
+  },
+  {
+   "code": "21",
+   "name": "부산광역시",
+   "bbox": [
+    128.7909,
+    34.9887,
+    129.3057,
+    35.3891
+   ],
+   "c2": 553,
+   "c1": 8,
+   "c0": 1406,
+   "points": 226,
+   "nocoord": 1741
+  },
+  {
+   "code": "22",
+   "name": "대구광역시",
+   "bbox": [
+    128.3515,
+    35.6065,
+    128.7613,
+    36.0162
+   ],
+   "c2": 519,
+   "c1": 302,
+   "c0": 1084,
+   "points": 130,
+   "nocoord": 1775
+  },
+  {
+   "code": "23",
+   "name": "인천광역시",
+   "bbox": [
+    124.6097,
+    37.2092,
+    126.7937,
+    37.9842
+   ],
+   "c2": 311,
+   "c1": 286,
+   "c0": 1345,
+   "points": 0,
+   "nocoord": 1942
+  },
+  {
+   "code": "24",
+   "name": "광주광역시",
+   "bbox": [
+    126.645,
+    35.051,
+    127.0222,
+    35.2587
+   ],
+   "c2": 126,
+   "c1": 46,
+   "c0": 472,
+   "points": 0,
+   "nocoord": 644
+  },
+  {
+   "code": "25",
+   "name": "대전광역시",
+   "bbox": [
+    127.2466,
+    36.1831,
+    127.5597,
+    36.5002
+   ],
+   "c2": 249,
+   "c1": 0,
+   "c0": 931,
+   "points": 0,
+   "nocoord": 1180
+  },
+  {
+   "code": "26",
+   "name": "울산광역시",
+   "bbox": [
+    128.9712,
+    35.3283,
+    129.4647,
+    35.7248
+   ],
+   "c2": 177,
+   "c1": 0,
+   "c0": 491,
+   "points": 0,
+   "nocoord": 668
+  },
+  {
+   "code": "29",
+   "name": "세종특별자치시",
+   "bbox": [
+    127.128,
+    36.4068,
+    127.4108,
+    36.7338
+   ],
+   "c2": 21,
+   "c1": 0,
+   "c0": 97,
+   "points": 0,
+   "nocoord": 118
+  },
+  {
+   "code": "31",
+   "name": "경기도",
+   "bbox": [
+    126.517,
+    36.8938,
+    127.8481,
+    38.2822
+   ],
+   "c2": 1470,
+   "c1": 493,
+   "c0": 5263,
+   "points": 405,
+   "nocoord": 6821
+  },
+  {
+   "code": "32",
+   "name": "강원특별자치도",
+   "bbox": [
+    127.095,
+    37.0278,
+    129.364,
+    38.6136
+   ],
+   "c2": 608,
+   "c1": 492,
+   "c0": 2184,
+   "points": 76,
+   "nocoord": 3208
+  },
+  {
+   "code": "33",
+   "name": "충청북도",
+   "bbox": [
+    127.2757,
+    36.0122,
+    128.6521,
+    37.2583
+   ],
+   "c2": 461,
+   "c1": 0,
+   "c0": 1188,
+   "points": 69,
+   "nocoord": 1580
+  },
+  {
+   "code": "34",
+   "name": "충청남도",
+   "bbox": [
+    126.1116,
+    35.9783,
+    127.6397,
+    37.065
+   ],
+   "c2": 791,
+   "c1": 23,
+   "c0": 1846,
+   "points": 243,
+   "nocoord": 2417
+  },
+  {
+   "code": "35",
+   "name": "전북특별자치도",
+   "bbox": [
+    126.4287,
+    35.2992,
+    127.9114,
+    36.1566
+   ],
+   "c2": 474,
+   "c1": 321,
+   "c0": 1378,
+   "points": 125,
+   "nocoord": 2048
+  },
+  {
+   "code": "36",
+   "name": "전라남도",
+   "bbox": [
+    125.3846,
+    34.111,
+    127.8079,
+    35.4869
+   ],
+   "c2": 627,
+   "c1": 0,
+   "c0": 1630,
+   "points": 145,
+   "nocoord": 2112
+  },
+  {
+   "code": "37",
+   "name": "경상북도",
+   "bbox": [
+    127.7961,
+    35.5669,
+    131.8715,
+    37.5491
+   ],
+   "c2": 829,
+   "c1": 214,
+   "c0": 2723,
+   "points": 0,
+   "nocoord": 3766
+  },
+  {
+   "code": "38",
+   "name": "경상남도",
+   "bbox": [
+    127.5761,
+    34.7018,
+    129.2189,
+    35.9099
+   ],
+   "c2": 947,
+   "c1": 68,
+   "c0": 2373,
+   "points": 169,
+   "nocoord": 3219
+  },
+  {
+   "code": "39",
+   "name": "제주특별자치도",
+   "bbox": [
+    126.1608,
+    33.1125,
+    126.9463,
+    33.5661
+   ],
+   "c2": 135,
+   "c1": 0,
+   "c0": 556,
+   "points": 87,
+   "nocoord": 604
+  }
+ ]
+}

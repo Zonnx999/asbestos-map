@@ -1,0 +1,311 @@
+{
+ "15053446": {
+  "updated": "2025-09-02",
+  "file": "15053446_강원특별자치도영월군.csv",
+  "bytes": 5967,
+  "fetched_at": "bootstrap"
+ },
+ "3046237": {
+  "updated": "2025-12-03",
+  "file": "3046237_강원특별자치도원주시.csv",
+  "bytes": 68129,
+  "fetched_at": "bootstrap"
+ },
+ "3046238": {
+  "updated": "2026-09-28",
+  "file": "3046238_강원특별자치도춘천시.csv",
+  "bytes": 17699,
+  "fetched_at": "bootstrap"
+ },
+ "15012282": {
+  "updated": "2026-05-08",
+  "file": "15012282_경기도고양시.csv",
+  "bytes": 150864,
+  "fetched_at": "bootstrap"
+ },
+ "3073849": {
+  "updated": "2026-09-30",
+  "file": "3073849_경기도군포시.csv",
+  "bytes": 35271,
+  "fetched_at": "bootstrap"
+ },
+ "15000828": {
+  "updated": "2026-11-04",
+  "file": "15000828_경기도성남시.csv",
+  "bytes": 22746,
+  "fetched_at": "bootstrap"
+ },
+ "3047316": {
+  "updated": "2026-02-20",
+  "file": "3047316_경기도안산시.csv",
+  "bytes": 23209,
+  "fetched_at": "bootstrap"
+ },
+ "3047293": {
+  "updated": "2026-08-24",
+  "file": "3047293_경기도하남시.csv",
+  "bytes": 24954,
+  "fetched_at": "bootstrap"
+ },
+ "15093011": {
+  "updated": "2026-10-12",
+  "file": "15093011_경상남도김해시.csv",
+  "bytes": 6184,
+  "fetched_at": "bootstrap"
+ },
+ "3068544": {
+  "updated": "2026-05-28",
+  "file": "3068544_경상남도창원시.csv",
+  "bytes": 34247,
+  "fetched_at": "bootstrap"
+ },
+ "3047216": {
+  "updated": "2026-09-14",
+  "file": "3047216_경상북도김천시.csv",
+  "bytes": 3216,
+  "fetched_at": "bootstrap"
+ },
+ "3047155": {
+  "updated": "2023-06-23",
+  "file": "3047155_경상북도문경시.csv",
+  "bytes": 4095,
+  "fetched_at": "bootstrap"
+ },
+ "3047099": {
+  "updated": "2025-11-25",
+  "file": "3047099_경상북도안동시.csv",
+  "bytes": 44281,
+  "fetched_at": "bootstrap"
+ },
+ "3068391": {
+  "updated": "2026-11-17",
+  "file": "3068391_경상북도영양군.csv",
+  "bytes": 973,
+  "fetched_at": "bootstrap"
+ },
+ "3046945": {
+  "updated": "2025-06-24",
+  "file": "3046945_경상북도영주시.csv",
+  "bytes": 6922,
+  "fetched_at": "bootstrap"
+ },
+ "3047310": {
+  "updated": "2026-08-12",
+  "file": "3047310_경상북도예천군.csv",
+  "bytes": 2316,
+  "fetched_at": "bootstrap"
+ },
+ "3068114": {
+  "updated": "2024-06-27",
+  "file": "3068114_경상북도청송군.csv",
+  "bytes": 4492,
+  "fetched_at": "bootstrap"
+ },
+ "3073551": {
+  "updated": "2014-04-28",
+  "file": "3073551_경상북도칠곡군.xlsx",
+  "bytes": 13516,
+  "fetched_at": "bootstrap"
+ },
+ "15113223": {
+  "updated": "2026-09-16",
+  "file": "15113223_경상북도포항시.csv",
+  "bytes": 10862,
+  "fetched_at": "bootstrap"
+ },
+ "3046092": {
+  "updated": "2026-10-02",
+  "file": "3046092_대구광역시남구.csv",
+  "bytes": 28104,
+  "fetched_at": "bootstrap"
+ },
+ "3047280": {
+  "updated": "2026-05-12",
+  "file": "3047280_대구광역시달서구.csv",
+  "bytes": 12174,
+  "fetched_at": "bootstrap"
+ },
+ "3046188": {
+  "updated": "2026-05-06",
+  "file": "3046188_대구광역시동구.csv",
+  "bytes": 27380,
+  "fetched_at": "bootstrap"
+ },
+ "3068216": {
+  "updated": "2026-08-25",
+  "file": "3068216_대구광역시북구.csv",
+  "bytes": 20933,
+  "fetched_at": "bootstrap"
+ },
+ "3068390": {
+  "updated": "2026-07-14",
+  "file": "3068390_대구광역시서구.csv",
+  "bytes": 4031,
+  "fetched_at": "bootstrap"
+ },
+ "15052017": {
+  "updated": "2026-09-18",
+  "file": "15052017_대구광역시수성구.csv",
+  "bytes": 5451,
+  "fetched_at": "bootstrap"
+ },
+ "3077221": {
+  "updated": "2025-07-25",
+  "file": "3077221_대구광역시수성구.csv",
+  "bytes": 701,
+  "fetched_at": "bootstrap"
+ },
+ "3057407": {
+  "updated": "2025-07-14",
+  "file": "3057407_대구광역시중구.xlsx",
+  "bytes": 22294,
+  "fetched_at": "bootstrap"
+ },
+ "15103460": {
+  "updated": "2026-09-20",
+  "file": "15103460_부산광역시.csv",
+  "bytes": 13331,
+  "fetched_at": "bootstrap"
+ },
+ "3038626": {
+  "updated": "2026-09-04",
+  "file": "3038626_부산광역시영도구.csv",
+  "bytes": 744,
+  "fetched_at": "bootstrap"
+ },
+ "3069195": {
+  "updated": "2026-09-10",
+  "file": "3069195_부산광역시영도구.csv",
+  "bytes": 2451,
+  "fetched_at": "bootstrap"
+ },
+ "15026377": {
+  "updated": "2026-07-09",
+  "file": "15026377_부산광역시중구.csv",
+  "bytes": 7989,
+  "fetched_at": "bootstrap"
+ },
+ "15166534": {
+  "updated": "2026-09-19",
+  "file": "15166534_서울특별시강서구.csv",
+  "bytes": 20361,
+  "fetched_at": "bootstrap"
+ },
+ "15052329": {
+  "updated": "2026-02-02",
+  "file": "15052329_서울특별시서초구.csv",
+  "bytes": 20386,
+  "fetched_at": "bootstrap"
+ },
+ "3077850": {
+  "updated": "2026-07-01",
+  "file": "3077850_서울특별시용산구.csv",
+  "bytes": 3875,
+  "fetched_at": "bootstrap"
+ },
+ "3076234": {
+  "updated": "2026-09-21",
+  "file": "3076234_울산광역시남구.csv",
+  "bytes": 8946,
+  "fetched_at": "bootstrap"
+ },
+ "3073073": {
+  "updated": "2026-04-20",
+  "file": "3073073_인천광역시계양구.csv",
+  "bytes": 37501,
+  "fetched_at": "bootstrap"
+ },
+ "3073220": {
+  "updated": "2026-03-17",
+  "file": "3073220_인천광역시연수구.csv",
+  "bytes": 3992,
+  "fetched_at": "bootstrap"
+ },
+ "15038683": {
+  "updated": "2025-07-24",
+  "file": "15038683_인천광역시영종구.csv",
+  "bytes": 53723,
+  "fetched_at": "bootstrap"
+ },
+ "3072921": {
+  "updated": "2026-08-20",
+  "file": "3072921_인천광역시제물포구.csv",
+  "bytes": 32573,
+  "fetched_at": "bootstrap"
+ },
+ "15086967": {
+  "updated": "2026-06-23",
+  "file": "15086967_전남광주통합특별시광산구.csv",
+  "bytes": 3164,
+  "fetched_at": "bootstrap"
+ },
+ "3074513": {
+  "updated": "2026-06-02",
+  "file": "3074513_전북특별자치도고창군.csv",
+  "bytes": 2245,
+  "fetched_at": "bootstrap"
+ },
+ "3068148": {
+  "updated": "2026-04-28",
+  "file": "3068148_전북특별자치도군산시.csv",
+  "bytes": 10068,
+  "fetched_at": "bootstrap"
+ },
+ "3077425": {
+  "updated": "2026-05-29",
+  "file": "3077425_전북특별자치도장수군.csv",
+  "bytes": 9749,
+  "fetched_at": "bootstrap"
+ },
+ "15054349": {
+  "updated": "2025-12-09",
+  "file": "15054349_전북특별자치도정읍시.csv",
+  "bytes": 13552,
+  "fetched_at": "bootstrap"
+ },
+ "15054350": {
+  "updated": "2025-12-09",
+  "file": "15054350_전북특별자치도정읍시.csv",
+  "bytes": 27877,
+  "fetched_at": "bootstrap"
+ },
+ "3075177": {
+  "updated": "2026-10-08",
+  "file": "3075177_충청남도계룡시.csv",
+  "bytes": 807,
+  "rows": "9",
+  "encoding": "cp949",
+  "fetched_at": "2026-11-18T09:44:50"
+ },
+ "3073034": {
+  "updated": "2025-11-27",
+  "file": "3073034_충청남도아산시.csv",
+  "bytes": 64639,
+  "fetched_at": "bootstrap"
+ },
+ "3071052": {
+  "updated": "2026-03-11",
+  "file": "3071052_충청남도천안시.csv",
+  "bytes": 20537,
+  "fetched_at": "bootstrap"
+ },
+ "3046085": {
+  "updated": "2022-09-28",
+  "file": "3046085_충청북도괴산군.csv",
+  "bytes": 4207,
+  "fetched_at": "bootstrap"
+ },
+ "15092323": {
+  "updated": "2026-11-03",
+  "file": "15092323_한국환경공단.csv",
+  "bytes": 3843384,
+  "fetched_at": "bootstrap"
+ },
+ "15155665": {
+  "updated": "2026-11-02",
+  "file": "15155665_전국석면조사건축물표준데이터.json",
+  "rows": 1525,
+  "bytes": 730507,
+  "fetched_at": "2026-11-18T09:44:55"
+ }
+}
