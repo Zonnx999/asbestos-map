@@ -38,6 +38,9 @@ ROLE_PATTERNS = {
     "pub": [r"^INSTT_NM$"],
 }
 
+# Seoul-owned facilities outside Seoul (서울대공원 in 과천, 물재생센터 in 고양 ...) often omit the sido: try these prefixes
+FALLBACK_SIDO = ["서울특별시", "경기도", "강원특별자치도", "충청남도", "충청북도", "인천광역시"]
+
 # per-source explicit overrides: role -> list of header names (joined with a space) | None disables the role
 OVERRIDES = {
     # no building-name column: 관리주체 (owner) + 건축물용도 (actually the building/room name)
@@ -52,6 +55,20 @@ OVERRIDES = {
     "3068544": dict(use=["건축물분류"]),
     # 영도(11 rows) lists 석면면적 only: area > 0 => asbestos
     "3038626": dict(),
+    # Seoul plaza OA-15383: 이름 = building, 기관명 = owning agency (name = "기관 이름"); address split over 주소1/주소2;
+    # no flag column -> 석면함유면적 (>0 asbestos, 0 not).  (fetch_all.py drops 소유자 and contact columns)
+    "15048930": dict(name=["기관명", "이름"], addr_join=["주소1", "주소2"], use=["건물용도"], fallback_sido=FALLBACK_SIDO),
+    # Seoul plaza OA-1119: 주소 has no space before the road name ("용산구한남대로 136"; clean_addr repairs it); 건물명 may be empty -> 기관명
+    "15072370": dict(name=["기관명", "건물명"], fallback_sido=FALLBACK_SIDO),
+    # 강동구 board: 석면여부 = 석면검출 / 미검출; no address column (publisher region only)
+    "3074878": dict(flag=["석면여부"], use=None),
+}
+
+# in sources.json as building_list, but not a building list: reason is written to the report
+NOT_BUILDINGS = {
+    "15048932": "Seoul OA-15384 석면시료: 12,857 per-sample lab/risk records (기관명 + 건물명 + 채취장소, no address, "
+                "no building id). Downloaded to data/raw but not used: it would only add a flag to buildings that "
+                "15048930/15072370 already list (1,302 of its 1,612 building names match those two).",
 }
 
 COUNTRY_BBOX = (32.5, 38.9, 124.0, 132.0)  # lat min/max, lng min/max (incl. Dokdo)
@@ -121,9 +138,9 @@ def flag_val(v):
     v = (v or "").strip()
     if not v:
         return None
-    if re.search(r"미해당|해당\s*없음|무석면|^[Nn]$|아님|없음", v):
+    if re.search(r"미해당|해당\s*없음|무석면|^[Nn]$|아님|없음|미검출|불검출", v):
         return 0
-    if re.search(r"해당|석면건축물|석면함유|^[Yy]$|있음", v):
+    if re.search(r"해당|석면건축물|석면함유|^[Yy]$|있음|검출", v):
         return 2
     return None
 
@@ -210,6 +227,18 @@ def process_source(src, path, geo, region, rep):
             pv = first(row, cols["pub"]).split()
             rp, rg = (pv[0], " ".join(pv[1:]) or None) if pv else (rp, rg)
         res = region.resolve(addr, pub_sido=rp, pub_sgg=rg)
+        if ovr.get("fallback_sido") and addr and not res.get("sgg"):
+            a0 = re.sub(r"^서울특별\s", "서울특별시 ", addr)
+            a0 = re.sub(r"^서울(?:특별시?)?\s+(?=\S+[시군도]\s)", "", a0)  # "서울특별시 경기도 과천시" (agency + town)
+            a0 = re.sub(r"(\S{2,3}시)\1", r"\1", a0)  # "과천시과천시"
+            a0 = re.sub(r"(?<=[가-힣]시)(?=[가-힣]+(?:동|읍|면|리)(?:\s|$))", " ", a0)  # "과천시주암동"
+            for pre in [""] + ovr["fallback_sido"]:
+                cand = (pre + " " + a0).strip()
+                r2 = region.resolve(cand, pub_sido=None, pub_sgg=None)
+                if r2.get("sgg"):
+                    addr, res = cand, r2
+                    cnt["sido inferred from address (fallback list)"] += 1
+                    break
         # addresses without a region prefix (e.g. "해양로 293") get the publisher's region
         if addr and not res.get("had_sido") and res["sido"] and rp:
             addr = " ".join(x for x in (rp, rg, addr) if x)
@@ -291,6 +320,17 @@ def merge(rows, rep, prio):
                 x, y = a["nkey"], b["nkey"]
                 if min(len(x), len(y)) >= 3 and (x in y or y in x):
                     a["rows"] += b["rows"]; a["srcs"] |= b["srcs"]; dead.add(id(b)); merged2 += 1
+    # pass 3: address-less rows (강동 board: name only) join the one same-name cluster of that sgg
+    bysn = collections.defaultdict(list)
+    for cl in clusters:
+        if id(cl) not in dead and cl["akey"].split("|", 1)[1]:
+            bysn[(cl["akey"].split("|", 1)[0], cl["nkey"])].append(cl)
+    for cl in clusters:
+        if id(cl) in dead or cl["akey"].split("|", 1)[1] or len(cl["nkey"]) < 3:
+            continue
+        cand = [c for c in bysn.get((cl["akey"].split("|", 1)[0], cl["nkey"]), []) if not (c["srcs"] & cl["srcs"])]
+        if len(cand) == 1:
+            cand[0]["rows"] += cl["rows"]; cand[0]["srcs"] |= cl["srcs"]; dead.add(id(cl)); merged2 += 1
     clusters = [c for c in clusters if id(c) not in dead]
     rep["dedupe_fuzzy"] = merged2
     final = []
@@ -334,6 +374,11 @@ def main():
         sid = s["id"]
         fn = (state.get(sid) or {}).get("file") or (os.path.basename(s["local_file"]) if s.get("local_file") else None)
         path = os.path.join(RAW, fn) if fn else None
+        if sid in NOT_BUILDINGS:
+            rep["skipped"].append((sid, s["publisher"], NOT_BUILDINGS[sid]))
+            continue
+        if (state.get(sid) or {}).get("via") and state[sid].get("updated"):
+            s = dict(s, updated=state[sid]["updated"])  # scraped sources: date of the live page
         if not path or not os.path.exists(path):
             rep["skipped"].append((sid, s["publisher"], "no local file: " + (s.get("notes") or "")[:90]))
             continue

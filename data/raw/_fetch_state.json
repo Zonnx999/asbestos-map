@@ -307,5 +307,45 @@
   "rows": 1525,
   "bytes": 730507,
   "fetched_at": "2026-11-18T09:44:55"
+ },
+ "3074878": {
+  "updated": "2026-11-19",
+  "file": "3074878_서울특별시강동구.csv",
+  "rows": 106,
+  "total": 106,
+  "bytes": 6754,
+  "encoding": "utf-8-sig",
+  "fetched_at": "2026-11-19T12:16:01",
+  "via": "gangdong.go.kr bbs b_098"
+ },
+ "15048930": {
+  "updated": "2026-11-19",
+  "file": "15048930_서울특별시.csv",
+  "rows": 2082,
+  "total": 2082,
+  "bytes": 473177,
+  "encoding": "utf-8-sig",
+  "fetched_at": "2026-11-19T12:15:22",
+  "via": "data.seoul.go.kr dataView.do"
+ },
+ "15048932": {
+  "updated": "2026-11-19",
+  "file": "15048932_서울특별시.csv",
+  "rows": 12857,
+  "total": 12857,
+  "bytes": 11821045,
+  "encoding": "utf-8-sig",
+  "fetched_at": "2026-11-19T12:15:49",
+  "via": "data.seoul.go.kr dataView.do"
+ },
+ "15072370": {
+  "updated": "2026-03-04",
+  "file": "15072370_서울특별시.csv",
+  "rows": 2082,
+  "total": 2082,
+  "bytes": 492334,
+  "encoding": "utf-8-sig",
+  "fetched_at": "2026-11-19T12:15:56",
+  "via": "data.seoul.go.kr dataView.do"
  }
 }

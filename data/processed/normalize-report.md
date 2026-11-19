@@ -1,15 +1,15 @@
 # normalize report
 
-Generated 2026-11-18 09:45 by scripts/normalize.py
+Generated 2026-11-19 12:17 by scripts/normalize.py
 
 ## Totals
 
-- rows read (kept, before dedupe): 43817
-- duplicates removed: 329 identical rows inside one source + 3589 cross-source exact (address+name) + 232 cross-source fuzzy (same address, name containment)
-- **final rows: 39667**  (c=2: 8984, c=1: 2290, c=0: 28393)
+- rows read (kept, before dedupe): 48087
+- duplicates removed: 458 identical rows inside one source + 4605 cross-source exact (address+name) + 360 cross-source fuzzy (same address, name containment)
+- **final rows: 42664**  (c=2: 9710, c=1: 2293, c=0: 30661)
 - with source coordinates: 1675
-- sgg resolved: 39667, sido-only: 0
-- class conflicts across sources (a=0 vs 2, newest explicit flag kept): 166
+- sgg resolved: 42447, sido-only: 217
+- class conflicts across sources (a=0 vs 2, newest explicit flag kept): 220
 
 ## Per source
 
@@ -46,6 +46,9 @@ Generated 2026-11-18 09:45 by scripts/normalize.py
 | 3038626 | 부산광역시 영도구 | 11 | 11 | 11 | 11/0/0 | 0 | 0 |  |
 | 3069195 | 부산광역시 영도구 | 33 | 33 | 33 | 0/33/0 | 0 | 0 | addr prefixed with publisher region 33 |
 | 15026377 | 부산광역시 중구 | 99 | 99 | 94 | 21/0/78 | 0 | 0 |  |
+| 15048930 | 서울특별시 | 2082 | 2082 | 2019 | 555/2/1525 | 0 | 181 | addr prefixed with publisher region 461 |
+| 15072370 | 서울특별시 | 2082 | 2082 | 2022 | 555/2/1525 | 0 | 188 | addr prefixed with publisher region 461 |
+| 3074878 | 서울특별시 강동구 | 106 | 106 | 100 | 64/0/42 | 0 | 0 |  |
 | 15166534 | 서울특별시 강서구 | 81 | 81 | 81 | 13/0/68 | 0 | 0 | addr prefixed with publisher region 77 |
 | 15052329 | 서울특별시 서초구 | 203 | 203 | 195 | 87/0/116 | 0 | 0 |  |
 | 3077850 | 서울특별시 용산구 | 65 | 65 | 51 | 0/65/0 | 0 | 0 |  |
@@ -69,10 +72,7 @@ Generated 2026-11-18 09:45 by scripts/normalize.py
 
 ## Skipped sources (no local file)
 
-- 15048930 서울특별시: no local file: data.go.kr only links out to the provider's own site: http://data.seoul.go.kr/dataList/OA-
-- 15048932 서울특별시: no local file: data.go.kr only links out to the provider's own site: http://data.seoul.go.kr/dataList/OA-
-- 15072370 서울특별시: no local file: data.go.kr only links out to the provider's own site: http://data.seoul.go.kr/dataList/OA-
-- 3074878 서울특별시 강동구: no local file: data.go.kr only links out to the provider's own site: https://www.gangdong.go.kr/web/newpo
+- 15048932 서울특별시: Seoul OA-15384 석면시료: 12,857 per-sample lab/risk records (기관명 + 건물명 + 채취장소, no address, no building id). Downloaded to data/raw but not used: it would only add a flag to buildings that 15048930/15072370 already list (1,302 of its 1,612 building names match those two).
 
 ## Coordinates
 
@@ -82,7 +82,28 @@ Generated 2026-11-18 09:45 by scripts/normalize.py
 
 ## Unresolved sgg (source, reason, first 3 address tokens: count)
 
-- none
+- 15048930 | sgg not found | 서울특별시 : 173
+- 15072370 | sgg not found | 서울특별시 : 173
+- 15048930 | sgg not found | : 2
+- 15072370 | sgg not found | 서울특별시 중구마장로 45: 2
+- 15072370 | sgg not found | : 2
+- 15048930 | sgg not found | 서울특별시 서대문 연희동: 1
+- 15048930 | sgg not found | 서울특별시 서울지 광진구: 1
+- 15048930 | sgg not found | 서울 특별시 관악구: 1
+- 15048930 | sgg not found | 서울특별시 서초동 반포동: 1
+- 15048930 | sgg not found | 서울특별시 경기도 고양시: 1
+- 15048930 | sgg not found | 서울특별시 경기도 용인시: 1
+- 15072370 | sgg not found | 서울특별시 중구다동길 11: 1
+- 15072370 | sgg not found | 서울특별시 서초동 반포동: 1
+- 15072370 | sgg not found | 서울 특별시 관악구: 1
+- 15072370 | sgg not found | 서울특별시 중구퇴계로 23가길: 1
+- 15072370 | sgg not found | 서울특별시 중구덕수궁길 15: 1
+- 15072370 | sgg not found | 서울특별시 중구세종대로 125: 1
+- 15072370 | sgg not found | 서울특별시 서울지 광진구: 1
+- 15072370 | sgg not found | 서울특별시 중구퇴계로 34길: 1
+- 15072370 | sgg not found | 서울특별시 서대문 연희동: 1
+- 15072370 | sgg not found | 서울특별시 중구충무로 56-1: 1
+- 15072370 | sgg not found | 서울특별시 중구을지로 227: 1
 
 ## Rejected rows (0)
 
@@ -121,6 +142,9 @@ Generated 2026-11-18 09:45 by scripts/normalize.py
 - 3038626: name=건물명; use=용도; area=연면적(m2); asb_area=석면면적(m2); date=데이터 기준일
 - 3069195: name=건물명; addr_road=도로명; use=건물용도
 - 15026377: name=건물명; addr_road=도로명; use=건물용도; flag=석면건축물 여부
+- 15048930: name=기관명/이름; use=건물용도; area=전체면적; year=준공일; asb_area=석면함유면적; addr_join=주소1/주소2
+- 15072370: name=기관명/건물명; addr_gen=주소; use=건물용도; area=전체면적(㎡); year=건축일자; asb_area=석면함유면적(㎡)
+- 3074878: name=건축물명; flag=석면여부
 - 15166534: name=건물명; addr_gen=주소; use=주용도; area=전체면적(제곱미터); year=건축일자; flag=석면함유여부; date=데이터기준일자
 - 15052329: name=건물명; addr_gen=주소; use=건축물구분; flag=석면건축물여부
 - 3077850: name=기관명; addr_gen=주소

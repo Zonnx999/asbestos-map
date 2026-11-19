@@ -6,6 +6,14 @@
  - 15155665 (전국석면조사건축물표준데이터): keyless /download/standard.json endpoint, paged.
  - State: data/raw/_fetch_state.json  {id: {updated, file, bytes, rows, fetched_at}}.
 Usage: fetch_all.py [--force] [--dry-run] [--ids ID ...]
+
+Seoul Open Data Plaza sheets (15048930=OA-15383, 15048932=OA-15384, 15072370=OA-1119; data.go.kr only links out):
+ keyless. The plaza's own grid reads /dataList/dataView.do (JS-object JSON, 1000 rows/page) after the
+ datasetView + sheetView pages set the session; the CSV button's datafile.seoul.go.kr POST rejects scripted calls
+ ("잘못된 접근"), so rows are paged and written as UTF-8-BOM CSV with the grid's Korean column labels.
+ Optional: env SEOUL_KEY (openapi.seoul.go.kr:8088/{KEY}/json/{SERVICE}/..) is NOT needed and not used.
+강동구 3074878: the bulletin board gangdong.go.kr/web/newportal/bbs/b_098 (구소유 석면조사 결과, one post per building:
+ title = building name, 석면여부 = 석면검출/미검출; no address) is scraped to a CSV.
 """
 import argparse, json, os, re, sys, time, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -15,6 +23,9 @@ from common import RAW, ROOT, SOURCES_JSON, write_json
 STATE = os.path.join(RAW, "_fetch_state.json")
 STD_ID = "15155665"
 SLEEP = 1.0
+SEOUL_SHEETS = {"15048930": "OA-15383", "15048932": "OA-15384", "15072370": "OA-1119"}
+GANGDONG_ID = "3074878"
+GANGDONG_URL = "https://www.gangdong.go.kr/web/newportal/bbs/b_098"
 
 
 def log(*a):
@@ -101,6 +112,98 @@ def fetch_standard(pk, state, force, dry):
     return "downloaded"
 
 
+def _js_obj(text):
+    """The plaza returns a JS object literal ({result:"ok",page:{..},list:[{K:"v"}]}); quote bare keys -> json."""
+    fixed = re.sub(r'"(?:\\.|[^"\\])*"|([{,]\s*)([A-Za-z_]\w*)\s*:',
+                   lambda m: m.group(0) if m.group(2) is None else '%s"%s":' % (m.group(1), m.group(2)), text)
+    return json.loads(re.sub(r',\s*([\]}])\s*$', r'\1', fixed.strip()).replace(',]}', ']}'), strict=False)
+
+
+def _write_csv(path, header, rows):
+    import csv
+    with open(path, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(header)
+        w.writerows(rows)
+
+
+def fetch_seoul(pk, state, force, dry):
+    inf = SEOUL_SHEETS[pk]
+    ref = "https://data.seoul.go.kr/dataList/%s/L/1/datasetView.do" % inf
+    if dry:
+        log("%-9s would page %s from data.seoul.go.kr" % (pk, inf))
+        return "would"
+    view = fd.req(ref).read().decode("utf-8", "replace")  # session cookie + 갱신일 (last update)
+    time.sleep(SLEEP)
+    um = re.search(r"갱신일[^0-9]{0,300}?(\d{4})\.(\d{2})\.(\d{2})", re.sub(r"<[^>]+>", " ", view), re.S)
+    upd = "%s-%s-%s" % um.groups() if um else time.strftime("%Y-%m-%d")
+    hdrs = {"Referer": ref, "X-Requested-With": "XMLHttpRequest"}
+    form = dict(srvType="S", infId=inf, serviceKind="1")
+    sv = fd.req("https://data.seoul.go.kr/dataList/sheetView.do?infId=%s&srvType=S" % inf, form, hdrs).read().decode("utf-8", "replace")
+    time.sleep(SLEEP)
+    cols = re.findall(r'\{key:"([A-Z_0-9]+)",\s*label:"([^"]*)"', sv)
+    # the plaza's default ORDER BY (a date) has many ties, so offset paging repeats/misses rows:
+    # order by (nearly) every column instead, which makes the order total and the paging exact
+    order = ",".join(k for k, _ in cols if k not in ("MTRL_PHOTO_1", "MTRL_PHOTO_2", "MNG_MSRS", "RPTP"))
+    if not cols:
+        log("%-9s sheet columns not found" % pk)
+        return "error"
+    rows, page, total, got = [], 1, None, set()
+    while True:
+        q = dict(onepagerow=1000, srvType="S", infId=inf, serviceKind="1", pageNo=page, ssUserId="SAMPLE_VIEW",
+                 strWhere="", strOrderby=order, filterCol="", txtFilter="")
+        raw = fd.req("https://data.seoul.go.kr/dataList/dataView.do?" + urllib.parse.urlencode(q), None, hdrs).read().decode("utf-8", "replace")
+        time.sleep(SLEEP)
+        j = _js_obj(raw.strip())
+        total = int(j["page"]["totalCount"])
+        rows += j["list"]
+        if len(rows) >= total or not j["list"] or page > 400:
+            break
+        page += 10  # pageNo offsets by 100 rows even with onepagerow=1000 (max 1000 rows/page)0  # the plaza's pageNo offsets by 100 rows even with onepagerow=1000
+    # personal data (owner, contact person, phone) is never written to disk
+    cols = [(k, l) for k, l in cols if k not in ("OWNR", "PIC_NM", "CNPL")]
+    keys = [k for k, _ in cols]
+    out = [[("" if r.get(c) in (None, "null") else str(r.get(c))) for c in keys] for r in rows]
+    if len(out) != total:
+        log("%-9s WARNING: got %d rows, plaza says %d" % (pk, len(out), total))
+    fn = "%s_서울특별시.csv" % pk
+    _write_csv(os.path.join(RAW, fn), [l for _, l in cols], out)
+    state[pk] = dict(updated=upd, file=fn, rows=len(out), total=total, bytes=os.path.getsize(os.path.join(RAW, fn)),
+                     encoding="utf-8-sig", fetched_at=time.strftime("%Y-%m-%dT%H:%M:%S"), via="data.seoul.go.kr dataView.do")
+    log("%-9s downloaded %s (%d of %d rows)" % (pk, fn, len(out), total))
+    return "downloaded"
+
+
+def fetch_gangdong(pk, state, force, dry):
+    import html as H
+    if dry:
+        log("%-9s would scrape %s" % (pk, GANGDONG_URL))
+        return "would"
+    url = GANGDONG_URL + "?cp=1&pageSize=100&sortOrder=BA_REGDATE&sortDirection=DESC&bcId=b_098&baNotice=false&baCommSelec=false&baOpenDay=true&baUse=true"
+    out, cp = [], 1
+    while True:
+        t = fd.req(url.replace("cp=1", "cp=%d" % cp)).read().decode("utf-8", "replace")
+        time.sleep(SLEEP)
+        total = int(re.search(r"총\s*(?:<[^>]+>\s*)*(\d+)", t).group(1))
+        n0 = len(out)
+        for tr in re.findall(r"<tr[^>]*>(.*?)</tr>", t, re.S):
+            m = re.search(r'<td[^>]*>\s*(\d+)\s*</td>.*?bbs/b_098/(\d+)[^"]*"[^>]*>(.*?)</a>.*?(미검출|석면검출)\s*</td>.*?<td[^>]*>\s*([^<]*?)\s*</td>', tr, re.S)
+            if m:
+                out.append([m.group(1), H.unescape(re.sub(r"<[^>]+>|\s+", " ", m.group(3))).strip(), m.group(4), m.group(5).strip(), m.group(2)])
+        if len(out) >= total or len(out) == n0 or cp >= 10:
+            break
+        cp += 1
+    if not out:
+        log("%-9s no rows parsed" % pk)
+        return "error"
+    fn = "%s_서울특별시강동구.csv" % pk
+    _write_csv(os.path.join(RAW, fn), ["번호", "건축물명", "석면여부", "작성부서", "게시물ID"], out)
+    state[pk] = dict(updated=time.strftime("%Y-%m-%d"), file=fn, rows=len(out), total=total, bytes=os.path.getsize(os.path.join(RAW, fn)),
+                     encoding="utf-8-sig", fetched_at=time.strftime("%Y-%m-%dT%H:%M:%S"), via="gangdong.go.kr bbs b_098")
+    log("%-9s downloaded %s (%d of %d rows)" % (pk, fn, len(out), total))
+    return "downloaded"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
@@ -116,8 +219,14 @@ def main():
     for s in srcs:
         pk = s["id"]
         try:
-            r = fetch_standard(pk, state, a.force, a.dry_run) if pk == STD_ID or s["kind"] == "standard" \
-                else fetch_file(pk, s, state, a.force, a.dry_run)
+            if pk in SEOUL_SHEETS:
+                r = fetch_seoul(pk, state, a.force, a.dry_run)
+            elif pk == GANGDONG_ID:
+                r = fetch_gangdong(pk, state, a.force, a.dry_run)
+            elif pk == STD_ID or s["kind"] == "standard":
+                r = fetch_standard(pk, state, a.force, a.dry_run)
+            else:
+                r = fetch_file(pk, s, state, a.force, a.dry_run)
         except Exception as e:  # keep going, report at the end
             log("%-9s ERROR %r" % (pk, e))
             r = "error"

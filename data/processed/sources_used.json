@@ -279,6 +279,33 @@
   "rows_final": 94
  },
  {
+  "id": "15048930",
+  "publisher": "서울특별시",
+  "title": "서울특별시_공공건축물 석면정보",
+  "updated": "2026-11-19",
+  "rows": 2082,
+  "url": "https://www.data.go.kr/data/15048930/fileData.do",
+  "rows_final": 2019
+ },
+ {
+  "id": "15072370",
+  "publisher": "서울특별시",
+  "title": "서울특별시_공공 건축물 석면 현황",
+  "updated": "2026-03-04",
+  "rows": 2082,
+  "url": "https://www.data.go.kr/data/15072370/fileData.do",
+  "rows_final": 2022
+ },
+ {
+  "id": "3074878",
+  "publisher": "서울특별시 강동구",
+  "title": "서울특별시 강동구_석면조사 정보",
+  "updated": "2026-11-19",
+  "rows": 106,
+  "url": "https://www.data.go.kr/data/3074878/fileData.do",
+  "rows_final": 100
+ },
+ {
   "id": "15166534",
   "publisher": "서울특별시 강서구",
   "title": "서울특별시 강서구_공공건축물 석면관리정보",
