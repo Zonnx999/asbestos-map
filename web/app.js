@@ -20,7 +20,7 @@
   const ZERO_FILL = '#f1f0ec';
   const SHORT = { '11': '서울', '21': '부산', '22': '대구', '23': '인천', '24': '광주', '25': '대전', '26': '울산', '29': '세종',
     '31': '경기', '32': '강원', '33': '충북', '34': '충남', '35': '전북', '36': '전남', '37': '경북', '38': '경남', '39': '제주' };
-  const GEO = { src: '원자료 좌표', vworld: '주소로 추정 (VWorld 지오코딩)', kakao: '주소로 추정 (카카오 지오코딩)',
+  const GEO = { src: '원자료 좌표', 'vworld-place': '건물명 검색으로 추정 (정확도 낮음)', vworld: '주소로 추정 (VWorld 지오코딩)', kakao: '주소로 추정 (카카오 지오코딩)',
     nominatim: '주소로 추정 (OSM Nominatim, 오차가 클 수 있음)' };
   const LIST_STEP = 200;
   // CARTO raster tiles now need a key: keyless URLs return an "API KEY REQUIRED" watermark tile with HTTP 200.

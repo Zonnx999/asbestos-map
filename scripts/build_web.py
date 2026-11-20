@@ -7,9 +7,10 @@ Then validates that totals == sum(sigungu) == sum(sido) == rows in buildings.csv
 """
 import csv, datetime, json, os, shutil, sys, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import (PROC, CACHE, WEBDATA, TOPO_SGG, TOPO_SIDO, Geo, Region, geocode_query, load_topo, feat_bbox, write_json, CURRENT_SIDO_NAME)
+from common import (PROC, CACHE, WEBDATA, TOPO_SGG, TOPO_SIDO, Geo, Region, geocode_query, place_key, PLACE_OK, load_topo, feat_bbox, write_json, CURRENT_SIDO_NAME)
 
 MAX_BOUNDARY = 1_500_000
+PLACE_FACILITY_HITS = False # accept name-search hits stored with "m":"head" (sub-building placed at its facility; ~65% precise)
 SIDO_FIELDS = ["lat", "lng", "c", "name", "addr", "use", "year", "area", "src", "sgg", "geo"]
 NOCOORD_FIELDS = ["c", "name", "addr", "use", "year", "src", "sgg"]
 
@@ -62,13 +63,16 @@ def main():
         lat = float(r["lat"]) if r["lat"] else None
         lng = float(r["lng"]) if r["lng"] else None
         how = "src" if lat is not None else None
-        if lat is None and cache and r["addr"]:
-            q = geocode_query(region, geo, r["addr"], sido, r["sgg"])
-            hit = cache.get(q)
-            if hit and hit.get("lat") is not None and hit["p"] in ("vworld", "kakao"):
-                if geo.in_bbox(hit["lat"], hit["lng"], sgg=r["sgg"] or None, sido=sido, pad=0.02):
-                    lat, lng, how = hit["lat"], hit["lng"], hit["p"]
-                else:
+        if lat is None and cache:
+            cands = []
+            if r["addr"]:
+                cands.append((cache.get(geocode_query(region, geo, r["addr"], sido, r["sgg"])), ("vworld", "kakao")))
+            cands.append((cache.get(place_key(r["sgg"], r["name"])), PLACE_OK))  # building-name search (rows w/o usable address)
+            for hit, ok in cands:
+                if hit and hit.get("lat") is not None and hit["p"] in ok and (PLACE_FACILITY_HITS or hit.get("m") != "head"):
+                    if geo.in_bbox(hit["lat"], hit["lng"], sgg=r["sgg"] or None, sido=sido, pad=0.02):
+                        lat, lng, how = hit["lat"], hit["lng"], hit["p"]
+                        break
                     dropped_geo += 1
         key = "c%d" % c
         for d, k in ((sgg_stat, sgg), (sido_stat, sido)):

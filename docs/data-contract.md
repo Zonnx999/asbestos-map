@@ -20,7 +20,7 @@ Class `c`: `2` = 석면건축물 (flag says yes) · `1` = 여부 미표기 (surv
 {"fields":["lat","lng","c","name","addr","use","year","area","src","sgg","geo"],
  "rows":[[35.85123,128.53211,2,"○○초등학교","대구 달서구 …","교육연구시설",1985,1234.5,"3047280","27290","src"]]}
 ```
-lat/lng rounded to 5 decimals; missing → `null`. `geo` = how the point was obtained: `"src"` (coords in source), `"vworld"`, `"kakao"`, `"nominatim"`.
+lat/lng rounded to 5 decimals; missing → `null`. `geo` = how the point was obtained: `"src"` (coords in source), `"vworld"` (address geocoding, incl. cleaned/modern-name variants), `"vworld-place"` (VWorld place search by building name, lower confidence than an address hit), `"kakao"`, `"nominatim"`.
 
 ## nocoord/{code}.json — rows still without coordinates
 `{"fields":["c","name","addr","use","year","src","sgg"],"rows":[…]}`

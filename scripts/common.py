@@ -500,6 +500,14 @@ def geocode_query(region, geo, addr, sido, sgg):
     return " ".join(p for p in parts if p)
 
 
+PLACE_OK = ("vworld-place",)
+
+
+def place_key(sgg, name):
+    """geocode.json key for a building-name place search (rows without a usable address)."""
+    return "place:%s:%s" % (sgg or "", re.sub(r"\s+", " ", nfc(name or "")).strip())
+
+
 def name_key(s):
     s = nfc(s or "").lower()
     s = re.sub(r"\([^)]*\)|\[[^\]]*\]", "", s)
